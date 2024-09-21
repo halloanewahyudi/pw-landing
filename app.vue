@@ -1,5 +1,8 @@
 <template>
-  <div class="montserrat-font">
+  <main class="montserrat-font">
+    <NuxtLayout>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
+  </main>
 </template>
+
