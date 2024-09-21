@@ -1,13 +1,53 @@
 <script lang="ts" setup>
+import { animate } from 'motion';
+
 const home = useHome()
 const cover = home.value[0].cover
 const porto = home.value[0].potfolio
+const about = home.value[0].about
+const what_we_do = home.value[0].what_we_do
+
+const selected = ref(null)
+const serviceItem = ref([])
+const active = ref()
+const showService = () => {
+    if (selected.value == null) {
+        serviceItem.value = what_we_do.services[0]
+        active.value = 'first'
+    }
+    else {
+        serviceItem.value = what_we_do.services[selected.value]
+
+    }
+
+    return serviceItem.value
+}
+const selectItem = (index) => {
+    selected.value = index
+    if (selected.value) {
+        active.value = 'on active '
+    } else {
+        active.value = 'active '
+    }
+}
+
+watchEffect(() => {
+    showService()
+     nextTick()
+    serviceItem.value
+})
+
+onMounted(() => {
+    //animate(".service-content", { opacity:[0,1] }, { duration: 1 })
+    const boxes = document.querySelectorAll(".service-content")
+    animate(boxes, { opacity: [0, 1] }, { easing: "ease-out" })
+})
 </script>
 
 <template>
     <main>
         <!--  seciton cover -->
-        <section class="bg-dark text-light min-h-screen flex flex-col justify-center">
+        <section class="bg-dark text-light min-h-screen flex flex-col justify-center py-20">
             <div class="flex flex-col lg:flex-row justify-between items-center">
                 <div class="content">
                     <div class="lg:w-[700px] w-full p-6 shrink-0 relative lg:-right-32 z-10 ">
@@ -35,34 +75,63 @@ const porto = home.value[0].potfolio
         <!--  // end seciton cover -->
 
         <!--  seciton portofolio -->
-          <section>
-        <div class="max-w-screen-lg mx-auto px-6 mt-20">
-            <ElementsSectionTitle :title="porto.title" :sub_title="porto.sub_title" class="mb-20" />
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20">
-                <div v-for="(item, index) in porto.items" :key="index" ref="items">
-                    <div>
-                        <ElementsPortoItem :title="item.name" :description="item.deacription" :image="item.image" />
+        <section>
+            <div class="max-w-screen-lg mx-auto px-6 mt-20">
+                <ElementsSectionTitle :title="porto.title" :sub_title="porto.sub_title" class="mb-20" />
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20">
+                    <div v-for="(item, index) in porto.items" :key="index" ref="items">
+                        <div>
+                            <ElementsPortoItem :title="item.name" :description="item.deacription" :image="item.image" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
         <!--  // end seciton portofolio -->
 
         <!--  seciton whoi we are -->
-          <section>
-            <div class="max-w-screen-lg mx-auto px-6 mt-20">
+        <section class="bg-red text-light py-20 lg:py-40 mt-20">
+            <div class="max-w-screen-lg mx-auto px-6 ">
+                <p class="tracking-widest font-semibold text-yellow">{{ about.title }}</p>
+                <h2 class="leading-normal mb-0 opacity-80">{{ about.description }}</h2>
             </div>
-          </section>
-       
+        </section>
         <!--  // end seciton whoi we are -->
 
         <!--  seciton what We do -->
-        <section>
-            <div class="max-w-screen-lg mx-auto px-6 mt-20">
+        <section class="px-6 py-20">
+            <div class="max-w-screen-lg mx-auto ">
+                <div class="relative flex flex-col items-center group">
+                    <p class="font-semibold tracking-wider">{{ what_we_do.title }}</p>
+
+                    <div class="flex gap-4 items-center justify-center">
+                        <div v-for="(item, index) in what_we_do.services" :key="index">
+                            <button @click="selectItem(index)"> {{ item.name }} </button>
+                        </div>
+                    </div>
+                    <transition>
+                        <div class="service-content" :class="active">
+                            <fade class="flex flex-col items-center group">
+                                <h1
+                                    class="big-title text-neutral-200 lg:text-[200px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
+                                    {{ serviceItem.name }}
+                                </h1>
+                            </fade>
+                            <div class="relative flex flex-col gap-5 text-center">
+                                <p class="mt-0  max-w-xl mx-auto">
+                                    {{ serviceItem.description }}
+                                </p>
+                                <router-link :to="serviceItem.link"
+                                    class="bg-red text-light w-24 h-24 rounded-full flex justify-center items-center p-4 text-sm font-semibold mx-auto hover:bg-orange hover:scale-90 duration-300">
+                                    Read more
+                                </router-link>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
             </div>
-          </section>
-       
+        </section>
+
         <!--  // end seciton what we do -->
     </main>
 </template>
