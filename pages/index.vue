@@ -92,7 +92,7 @@ watchEffect(() => {
         v-motion
         :initial="{ opacity:0, scaleX:0}"
         :visible="{opacity:1, scaleX:1}"
-        :duration="700"
+        :duration="300"
         :delay="100"
          class="bg-red text-light py-20 lg:py-40 mt-40 w-full origin-left">
             <div class="max-w-screen-lg mx-auto px-6 ">

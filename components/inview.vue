@@ -4,11 +4,10 @@
                 :initial="{opacity:0,y:100}" 
                 :visible="{
                     opacity:1, 
-                    y: 0,
-                    transition:{
-                    duration:1200,
-                    delay:index*100
-                }}"
+                    y: 0}"
+                :leave="{opacity:0, y:-100}"
+                :duration="1200"
+                :delay="100"
     class="inview">
         <slot></slot>
     </div>
