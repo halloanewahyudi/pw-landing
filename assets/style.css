@@ -60,3 +60,7 @@
     }
 
 }
+
+.service-content{
+    @apply max-w-screen-lg mx-auto px-6 lg:px-12;
+}

@@ -29,17 +29,13 @@ const odoo = service.value[0].odoo
                         </div>
                     </div>
                         <div class="service-content">
-                            <fade class="flex flex-col items-center group">
-                                <h1
-                                    class="big-title text-neutral-200 lg:text-[200px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
+                            <inview class="flex flex-col items-center group">
+                                <h1  class="big-title text-neutral-200 lg:text-[140px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
                                     {{ odoo.title }}
                                 </h1>
-                            </fade>
-                            <div class="relative flex flex-col gap-5 text-center">
-                                <p class="mt-0  max-w-xl mx-auto">
-                                    {{ odoo.content }}
-                                </p>
-
+                            </inview>
+                            <div class="relative flex flex-col gap-5 ">
+                                <div v-html="odoo.content"></div>
                             </div>
                         </div>
                 </div>

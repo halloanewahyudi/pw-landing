@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { animate } from 'motion';
 
 const home = useHome()
 const cover = home.value[0].cover
@@ -37,17 +36,13 @@ watchEffect(() => {
     serviceItem.value
 })
 
-onMounted(() => {
-    //animate(".service-content", { opacity:[0,1] }, { duration: 1 })
-    const boxes = document.querySelectorAll(".service-content")
-    animate(boxes, { opacity: [0, 1] }, { easing: "ease-out" })
-})
+
 </script>
 
 <template>
     <main>
         <!--  seciton cover -->
-        <section class="bg-dark text-light min-h-screen flex flex-col justify-center py-20">
+        <section  class="bg-dark text-light min-h-screen flex flex-col justify-center py-20">
             <div class="flex flex-col lg:flex-row justify-between items-center">
                 <div class="content">
                     <div class="lg:w-[700px] w-full p-6 shrink-0 relative lg:-right-32 z-10 ">
@@ -74,15 +69,18 @@ onMounted(() => {
         </section>
         <!--  // end seciton cover -->
 
+        <div  >
         <!--  seciton portofolio -->
-        <section>
-            <div class="max-w-screen-lg mx-auto px-6 mt-20">
+        <section class="my-20" v-motion :initial="{y:100}" :visible="{y:0}" :duration="5000">
+            <div class="max-w-screen-lg mx-auto px-6 ">
                 <ElementsSectionTitle :title="porto.title" :sub_title="porto.sub_title" class="mb-20" />
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20">
                     <div v-for="(item, index) in porto.items" :key="index" ref="items">
+                        <inview>
                         <div>
                             <ElementsPortoItem :title="item.name" :description="item.deacription" :image="item.image" />
                         </div>
+                    </inview>
                     </div>
                 </div>
             </div>
@@ -90,16 +88,25 @@ onMounted(() => {
         <!--  // end seciton portofolio -->
 
         <!--  seciton whoi we are -->
-        <section class="bg-red text-light py-20 lg:py-40 mt-20">
+        <section
+        v-motion
+        :initial="{ opacity:0, scaleX:0}"
+        :visible="{opacity:1, scaleX:1}"
+        :duration="700"
+        :delay="100"
+         class="bg-red text-light py-20 lg:py-40 mt-40 w-full origin-left">
             <div class="max-w-screen-lg mx-auto px-6 ">
                 <p class="tracking-widest font-semibold text-yellow">{{ about.title }}</p>
-                <h2 class="leading-normal mb-0 opacity-80">{{ about.description }}</h2>
+                <inview>
+                    <h2 class="leading-normal mb-0 opacity-80">{{ about.description }}</h2>
+                </inview>
+               
             </div>
         </section>
         <!--  // end seciton whoi we are -->
 
         <!--  seciton what We do -->
-        <section class="px-6 py-20">
+        <section  class="px-6 py-20">
             <div class="max-w-screen-lg mx-auto ">
                 <div class="relative flex flex-col items-center group">
                     <p class="font-semibold tracking-wider">{{ what_we_do.title }}</p>
@@ -111,12 +118,12 @@ onMounted(() => {
                     </div>
                     <transition>
                         <div class="service-content" :class="active">
-                            <fade class="flex flex-col items-center group">
+                            <inview class="flex flex-col items-center group">
                                 <h1
-                                    class="big-title text-neutral-200 lg:text-[200px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
+                                    class="big-title text-neutral-200 lg:text-[140px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
                                     {{ serviceItem.name }}
                                 </h1>
-                            </fade>
+                            </inview>
                             <div class="relative flex flex-col gap-5 text-center">
                                 <p class="mt-0  max-w-xl mx-auto">
                                     {{ serviceItem.description }}
@@ -131,8 +138,8 @@ onMounted(() => {
                 </div>
             </div>
         </section>
-
         <!--  // end seciton what we do -->
+    </div> <!-- end data scroll container -->
     </main>
 </template>
 <style lang="postcss" scoped>
@@ -140,5 +147,8 @@ onMounted(() => {
     img {
         @apply grayscale-[20] opacity-40 hover:grayscale-0 hover:opacity-100 duration-200;
     }
+}
+section{
+    @apply min-h-screen;
 }
 </style>

@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
+    '@vueuse/motion/nuxt',
+    'nuxt-locomotive-scroll'
   ],
 //  css:['./assets/typography.css'],
   tailwindcss:{
