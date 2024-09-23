@@ -38,7 +38,7 @@ watchEffect(() => {
     serviceItem.value
 })
 
-
+const router = useRouter()
 </script>
 
 <template>
@@ -52,7 +52,7 @@ watchEffect(() => {
                         <span class="text-yellow font-semibold tracking-widest ">{{ cover.sub_title }}</span>
                         <h1 class="big-title">{{ cover.title }}</h1>
                         <p> {{ cover.description }}</p>
-                        <ElementsButtonLight btnText="Selanjutnya" class="mt-7" />
+                        <ElementsButtonLight @click="router.push('/about')" btnText="Selanjutnya" class="mt-7" />
                     </div>
                 </div>
                 <div class="w-full overflow-hidden">

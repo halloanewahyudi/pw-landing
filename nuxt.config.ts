@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  app: {
+    layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
