@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <p>home page</p>
-      <slot />
-    </div>
-  </template>
+  <div>
+  <ElementsNavbar />
+    <slot />
+  </div>
+</template>

@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+definePageMeta({
+    layout:'home'
+})
 
 const home = useHome()
 const cover = home.value[0].cover
@@ -32,7 +35,6 @@ const selectItem = (index) => {
 
 watchEffect(() => {
     showService()
-     nextTick()
     serviceItem.value
 })
 
