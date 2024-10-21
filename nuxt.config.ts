@@ -17,4 +17,11 @@ export default defineNuxtConfig({
     configPath:'tailwind.config.js',
     cssPath:'./assets/style.css'
   }
+  //saya ingin membuat baseurlrest api
+    runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3000/api'
+    }
+  }
+
 })

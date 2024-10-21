@@ -39,11 +39,26 @@ watchEffect(() => {
 })
 
 const router = useRouter()
+
+const baseUrl = useRuntimeConfig().public.baseUrl
+const getData = async () => {
+    try {
+        const response = await fetch(`${baseUrl}/wp/v2/pages?slug=home-page&_embed`)
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error('Error fetching data:', error)
+    }
+}
+
+const { data, pending, error } = await useAsyncData('home', getData)
+
 </script>
 
 <template>
     <main>
         <!--  seciton cover -->
+        {{data}}
         <section  class="bg-dark text-light min-h-screen flex flex-col justify-center py-20">
             <div class="flex flex-col lg:flex-row justify-between items-center">
                 <div class="content">
