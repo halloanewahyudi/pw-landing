@@ -27,7 +27,7 @@ const prop = defineProps({
         }">
             <img :src="prop.image" alt="" srcset="" class="h-[620px] w-full object-cover" >
         </div>
-        <div class="absolute -right-2 bottom-10">
+        <div class="absolute -right-2 bottom-10 max-w-[300px] bg-black text-white p-5">
             <h3>{{ prop.title }}</h3>
             <p class="mt-0">{{ description }}</p>
         </div>

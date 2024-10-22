@@ -1,9 +1,10 @@
 
 export const useHome = () => {
+   
     return useState('home', () => [
         {
             cover: {
-                title: 'A digital agency focused on web',
+                title:'A digital agency focused on web',
                 sub_title: 'PROWEB INDONESIA',
                 description: 'We are a creative team of designers, developers, strategists, and producers building elevated websites in the heart of Silicon Valley.'
             },
