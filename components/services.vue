@@ -9,11 +9,11 @@
 
         <transition>
             <div class="service-content" :class="active">
-                <inview class="flex flex-col items-center group">
+                <div class="flex flex-col items-center group">
                     <h1 class="big-title text-neutral-200 lg:text-[140px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
                         {{showTitle }}
                     </h1>
-                </inview>
+                </div>
                 <div class="relative flex flex-col gap-5 text-center">
                     <div class="mt-0  max-w-xl mx-auto">   
                         {{ showExcerpt }}
