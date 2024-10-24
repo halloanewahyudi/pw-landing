@@ -12,34 +12,7 @@ const porto = home.value[0].potfolio
 const about = home.value[0].about
 const what_we_do = home.value[0].what_we_do
 
-const selected = ref(null)
-const serviceItem = ref([])
-const active = ref()
-const showService = () => {
-    if (selected.value == null) {
-        serviceItem.value = what_we_do.services[0]
-        active.value = 'first'
-    }
-    else {
-        serviceItem.value = what_we_do.services[selected.value]
 
-    }
-
-    return serviceItem.value
-}
-const selectItem = (index) => {
-    selected.value = index
-    if (selected.value) {
-        active.value = 'on active '
-    } else {
-        active.value = 'active '
-    }
-}
-
-watchEffect(() => {
-    showService()
-    serviceItem.value
-})
 const router = useRouter()
 
 //mengambil data dari wp
@@ -99,8 +72,11 @@ const { images, isLoading, error: errorImage } = useMarqueeImages();
             <!--  seciton portofolio -->
 
             <section class="my-20" v-motion :initial="{ y: 100 }" :visible="{ y: 0 }" :duration="5000">
-                <div class="max-w-screen-lg mx-auto px-6 ">
-                    <ElementsSectionTitle :title="porto.title" :sub_title="porto.sub_title" class="mb-20" />
+                <div  class="max-w-screen-lg mx-auto px-6 ">
+                    <div v-if="acfData && acfData.project_section">
+                        <ElementsSectionTitle :title="acfData.project_section.title" :sub_title="acfData.project_section.sub_title" class="mb-20" />
+                    </div>
+                   
                     <portofolio></portofolio>
                 </div>
             </section>
@@ -114,41 +90,20 @@ const { images, isLoading, error: errorImage } = useMarqueeImages();
                     <inview>
                         <h2 class="leading-normal mb-0 opacity-80">{{ acfData.who_we_are.content }}</h2>
                     </inview>
-
                 </div>
             </section>
             <!--  // end seciton whoi we are -->
+
+          
 
             <!--  seciton what We do -->
             <section class="px-6 py-20">
                 <div class="max-w-screen-lg mx-auto ">
                     <div class="relative flex flex-col items-center group">
-                        <p class="font-semibold tracking-wider">{{ what_we_do.title }}</p>
-
-                        <div class="flex gap-4 items-center justify-center">
-                            <div v-for="(item, index) in what_we_do.services" :key="index">
-                                <button @click="selectItem(index)"> {{ item.name }} </button>
-                            </div>
+                        <div v-if="acfData && acfData.services_section">
+                        <p class="font-semibold tracking-wider">{{ acfData.services_section.title }}</p>
                         </div>
-                        <transition>
-                            <div class="service-content" :class="active">
-                                <inview class="flex flex-col items-center group">
-                                    <h1
-                                        class="big-title text-neutral-200 lg:text-[140px] mb-0 relative group-hover:scale-95 duration-300 delay-150 origin-center">
-                                        {{ serviceItem.name }}
-                                    </h1>
-                                </inview>
-                                <div class="relative flex flex-col gap-5 text-center">
-                                    <p class="mt-0  max-w-xl mx-auto">
-                                        {{ serviceItem.description }}
-                                    </p>
-                                    <router-link :to="serviceItem.link"
-                                        class="bg-red text-light w-24 h-24 rounded-full flex justify-center items-center p-4 text-sm font-semibold mx-auto hover:bg-orange hover:scale-90 duration-300">
-                                        Read more
-                                    </router-link>
-                                </div>
-                            </div>
-                        </transition>
+                        <services></services>
                     </div>
                 </div>
             </section>
