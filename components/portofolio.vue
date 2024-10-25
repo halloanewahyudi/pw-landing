@@ -21,7 +21,7 @@ onMounted(async () => {
 <template>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20">
         <div v-for="(item, index) in porto" :key="index" ref="items">
-            <ElementsPortoItem :title="item.title.rendered" :description="item.acf.description" :image="item._embedded['wp:featuredmedia'][0].source_url" />
-        </div>
+            <ElementsPortoItem :title="item.title.rendered" :description="item.acf.description" :image="item._embedded['wp:featuredmedia'][0].source_url" :link="item.acf.visit_web.url"/>
+          </div>
     </div>
 </template>

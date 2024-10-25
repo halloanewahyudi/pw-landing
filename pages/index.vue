@@ -24,7 +24,8 @@ const { images, isLoading, error: errorImage } = useMarqueeImages();
 </script>
 
 <template>
-    <main>
+    <div>
+        <main >
         <!--  seciton cover -->
         <section class="bg-dark text-light min-h-screen flex flex-col justify-center py-20">
             <div class="flex flex-col lg:flex-row justify-between items-center">
@@ -43,10 +44,10 @@ const { images, isLoading, error: errorImage } = useMarqueeImages();
                 </div>
 
                 <div class="w-full overflow-hidden">
-                    <div class="fixed top-0 left-0 w-full h-screen flex flex-col justify-center items-center"
+                    <div class="fixed top-0 left-0 w-full h-screen flex flex-col justify-center items-center z-[1000]"
                         v-if="isLoading">
                         <div>
-                            Loading...
+                           <logo class="animate-bounce" />
                         </div>
                     </div>
                     <div v-else-if="error">Error: {{ error.message }}</div>
@@ -110,6 +111,8 @@ const { images, isLoading, error: errorImage } = useMarqueeImages();
             <!--  // end seciton what we do -->
         </div> <!-- end data scroll container -->
     </main>
+    </div>
+   
 </template>
 <style lang="postcss" scoped>
 .porto-marque {

@@ -29,7 +29,8 @@ const prop = defineProps({
         </div>
         <div class="absolute -right-2 bottom-10 max-w-[300px] bg-black text-white p-5">
             <h3>{{ prop.title }}</h3>
-            <p class="mt-0">{{ description }}</p>
+            <p class="mt-0">{{ prop.description }}</p>
+            <a :href="prop.link" class="text-yellow mt-2 hover:text-orange duration-300 text-sm flex items-center gap=-2 self-end" target="_blank"> Kunjungi Website <IconsArrowRight /></a>
         </div>
     
     </div>
